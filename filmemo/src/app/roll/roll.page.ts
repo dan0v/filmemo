@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
 import { AppConstant, FilmType } from '../models/enums';
 import { Roll } from '../models/roll';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-roll',
@@ -25,6 +26,7 @@ export class RollPage implements OnInit {
   protected filmBrandText:string = "";
   protected cameraText:string = "";
   protected lensText:string = "";
+  protected expiryDateText:string = "";
 
   async ngOnInit() {
     this._activatedRoute.paramMap.subscribe(async paramMap => {
@@ -36,7 +38,7 @@ export class RollPage implements OnInit {
         if (this.pageId == AppConstant.NEW_ROLL_ID) {
           await this.saveRollToSummary();
           await this.saveRoll(true);
-          this._router.navigate(['/roll', this.roll.id]);
+          this._router.navigate(['/roll', this.roll.id], { replaceUrl: true });
         }
         else {
           let roll:Roll|null = await this._storage.getRoll(this.pageId);
@@ -89,6 +91,20 @@ export class RollPage implements OnInit {
   protected async lensCommitted(event:any):Promise<void> {
     if (this.roll.lens != this.lensText) {
       this.roll.lens = this.lensText;
+      await this.saveRoll();
+    }
+  }
+
+  protected async expectedShotCountCommitted(event:any):Promise<void> {
+    if (this.roll.expectedShotCount != parseInt(event.detail.value)) {
+      this.roll.expectedShotCount = parseInt(event.detail.value);
+      await this.saveRoll();
+    }
+  }
+
+  protected async expiryYearCommitted(event:any):Promise<void> {
+    if (this.roll.expiryYear != parseInt(event.detail.value)) {
+      this.roll.expiryYear = parseInt(event.detail.value);
       await this.saveRoll();
     }
   }

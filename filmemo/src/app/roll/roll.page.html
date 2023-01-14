@@ -3,30 +3,43 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>Roll</ion-title>
+    <ion-title>
+      <ion-icon [ios]="'film' + '-outline'" [md]="'film' + '-sharp'"></ion-icon>
+      <ion-label>Roll</ion-label>
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-item>
-    <ion-label color="primary" position="fixed">Film brand</ion-label>
-    <ion-input placeholder="Enter a film brand" [value]="filmBrandText" (ionChange)="filmBrandChanged($event)" (ionBlur)="filmBrandCommitted($event)"></ion-input>
+  <ion-item lines="none">
+    <ion-label color="secondary" position="floating">Film brand</ion-label>
+    <ion-input placeholder="What is the brand of film" [value]="filmBrandText" (ionChange)="filmBrandChanged($event)" (ionBlur)="filmBrandCommitted($event)"></ion-input>
   </ion-item>
-  <ion-item>
-    <ion-label color="primary" position="fixed">Film type</ion-label>
-    <ion-select interface="popover" placeholder="Select film type" (ionChange)="filmTypeCommitted($event)"
+  <ion-item lines="none">
+    <ion-label color="secondary" position="floating">Film type</ion-label>
+    <ion-select interface="popover" placeholder="What film type is used" (ionChange)="filmTypeCommitted($event)"
       [value]="roll.filmType">
       <ion-select-option *ngFor="let type of filmTypeOptions" value="{{type}}">{{type}}</ion-select-option>
     </ion-select>
   </ion-item>
-  <ion-item>
-    <ion-label color="primary" position="fixed">Camera</ion-label>
-    <ion-input placeholder="Enter a camera" [value]="cameraText" (ionChange)="cameraChanged($event)" (ionBlur)="cameraCommitted($event)"></ion-input>
+  <ion-item lines="none">
+    <ion-label color="secondary" position="floating">Camera</ion-label>
+    <ion-input placeholder="What camera is used" [value]="cameraText" (ionChange)="cameraChanged($event)" (ionBlur)="cameraCommitted($event)"></ion-input>
   </ion-item>
-  <ion-item>
-    <ion-label color="primary" position="fixed">Lens</ion-label>
-    <ion-input placeholder="Enter a lens" [value]="lensText" (ionChange)="lensChanged($event)" (ionBlur)="lensCommitted($event)"></ion-input>
+  <ion-item lines="none">
+    <ion-label color="secondary" position="floating">Lens</ion-label>
+    <ion-input placeholder="What lens is used" [value]="lensText" (ionChange)="lensChanged($event)" (ionBlur)="lensCommitted($event)"></ion-input>
   </ion-item>
+  <ion-item lines="none">
+    <ion-label color="secondary" position="floating">Expected shot count</ion-label>
+    <ion-input placeholder="How many shots fit on this roll" [value]="roll.expectedShotCount" (ionChange)="expectedShotCountCommitted($event)" type="number"></ion-input>
+  </ion-item>
+  <ion-item lines="none">
+    <ion-label color="secondary" position="floating">Expiry date</ion-label>
+    <ion-input placeholder="When does this roll expire" [value]="roll.expiryYear"
+      (ionChange)="expiryYearCommitted($event)" type="number"></ion-input>
+  </ion-item>
+
   <ion-button (click)="removeRollClicked()">
     <ion-icon slot="start" [ios]="'trash' + '-outline'" [md]="'trash' + '-sharp'"></ion-icon>
     <ion-label>Remove roll</ion-label>
