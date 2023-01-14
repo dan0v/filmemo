@@ -1,0 +1,97 @@
+import { RollSummary } from './../models/rollSummary';
+import { StorageHandlerService } from './../services/storage-handler.service';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { NavController } from '@ionic/angular';
+import { AppConstant, FilmType } from '../models/enums';
+import { Roll } from '../models/roll';
+
+@Component({
+  selector: 'app-roll',
+  templateUrl: './roll.page.html',
+  styleUrls: ['./roll.page.scss'],
+})
+export class RollPage implements OnInit {
+
+  constructor(private navCtrl:NavController, private router:Router, private activatedRoute:ActivatedRoute, private _storage:StorageHandlerService) { 
+    this.roll = new Roll(_storage);
+  }
+
+  protected roll:Roll;
+  private pageId:string|null = "";
+  protected filmTypeOptions:FilmType[] = RollPage.listFilmTypeOptions();
+
+  async ngOnInit() {
+    this.activatedRoute.paramMap.subscribe(async paramMap => {
+      if (!paramMap.has(AppConstant.ID_PARAM)) {
+        this.router.navigate(['/']);
+      }
+      this.pageId = paramMap.get(AppConstant.ID_PARAM);
+      if (this.pageId != null) {
+        if (this.pageId == AppConstant.NEW_ROLL_ID) {
+          await this.saveRollToSummary();
+          await this.saveRoll(true);
+          this.router.navigate(['/roll', this.roll.id]);
+        }
+        else {
+          let roll:Roll|null = await this._storage.getRoll(this.pageId);
+          if (roll == null) {
+            this.router.navigateByUrl('');
+          } else {
+            this.roll = roll;
+          }
+        }
+      }
+    });
+  }
+
+  private async saveRoll(newRoll:boolean):Promise<void> {
+    if(newRoll) {
+      let uniqueIdFound:boolean = false;
+      while (!uniqueIdFound) {
+        let existingRoll:Roll|null = await this._storage.getRoll(this.roll.id);
+        if (existingRoll == null) {
+          uniqueIdFound = true;
+        } else {
+          this.roll.id = crypto.randomUUID(); // One more attempt at a unique ID
+        }
+      }
+    }
+
+    await this._storage.setRoll(this.roll.id, this.roll);
+    console.log("saved roll with ID " + this.roll.id);
+  }
+
+  private async saveRollToSummary():Promise<void> {
+    let existingRollsSummary:RollSummary[] = await this._storage.getRollsSummaryList() ?? [];
+    let newRollSummary:RollSummary = new RollSummary();
+    this.roll.id = newRollSummary.id;
+
+    existingRollsSummary.push(newRollSummary);
+    await this._storage.setRollsSummaryList(existingRollsSummary);
+    console.log("saved roll summary");
+    console.log(existingRollsSummary);
+  }
+
+  private async removeRollFromSummary():Promise<void> {
+    let existingRollsSummary:RollSummary[] = await this._storage.getRollsSummaryList() ?? [];
+    existingRollsSummary = existingRollsSummary.filter(r => r.id != this.roll.id);
+    await this._storage.setRollsSummaryList(existingRollsSummary);
+  }
+
+  public async removeRollClicked():Promise<void> {
+    await this._storage.removeRoll(this.roll.id);
+    await this.removeRollFromSummary();
+    this.router.navigateByUrl("/landing");
+  }
+
+  private static listFilmTypeOptions():FilmType[] {
+    return [
+      FilmType.BW,
+      FilmType.COLOR,
+      FilmType.INFRARED,
+      FilmType.SLIDECOLOR
+    ]
+  }
+
+}

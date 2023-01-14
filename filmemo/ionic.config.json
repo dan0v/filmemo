@@ -1,0 +1,7 @@
+{
+  "name": "filmemo",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

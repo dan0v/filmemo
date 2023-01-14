@@ -1,0 +1,15 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Roll</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-select placeholder="Select film type">
+    <ion-select-option *ngFor="let type of filmTypeOptions" value="{{type}}">{{type}}</ion-select-option>
+  </ion-select>
+  <ion-button (click)="removeRollClicked()">
+    <ion-icon slot="start" [ios]="'trash' + '-outline'" [md]="'trash' + '-sharp'"></ion-icon>
+    <ion-label>Remove roll</ion-label>
+  </ion-button>
+</ion-content>
