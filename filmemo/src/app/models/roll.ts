@@ -6,7 +6,7 @@ import { Shot } from "./shot";
 export class Roll {
 	public id:string = "";
 	public filmBrand:string = "";
-	public expirationDate:string|null = null;
+	public expiryYear:number|null = null;
 	public filmType:FilmType|null = null;
 	public lens:string = "";
 	public camera:string = "";
@@ -31,7 +31,7 @@ export class Roll {
 		return JSON.stringify({
 			a: this.id,
 			b: this.filmBrand,
-			c: this.expirationDate,
+			c: this.expiryYear,
 			d: this.filmType,
 			e: this.lens,
 			f: this.camera,
@@ -50,7 +50,7 @@ export class Roll {
 
 		roll.id = parsed.a;
 		roll.filmBrand = parsed.b;
-		roll.expirationDate = parsed.c;
+		roll.expiryYear = parsed.c;
 		roll.filmType = parsed.d;
 		roll.lens = parsed.e;
 		roll.camera = parsed.f;

@@ -68,7 +68,8 @@ export enum AppConstant {
 	IMAGES_LIST = "imagesList",
 	ID_PARAM = "id",
 	NEW_ROLL_ID = "new",
-	LANDING_PAGE = "/landing"
+	LANDING_PAGE = "/landing",
+	DATE_FORMAT = "YYYY-MM-dd"
 }
 
 export enum StorageHandlerEventType {
