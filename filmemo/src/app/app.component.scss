@@ -22,11 +22,11 @@ ion-menu.md ion-note {
   padding-left: 10px;
 }
 
-ion-menu.md ion-list#inbox-list {
+ion-menu.md ion-list#rolls-summary-list {
   border-bottom: 1px solid var(--ion-color-step-150, #d7d8da);
 }
 
-ion-menu.md ion-list#inbox-list ion-list-header {
+ion-menu.md ion-list#rolls-summary-list ion-list-header {
   font-size: 22px;
   font-weight: 600;
 
@@ -116,4 +116,30 @@ ion-note {
 
 ion-item.selected {
   --color: var(--ion-color-primary);
+}
+
+#rolls-summary-list {
+  padding-bottom: 4vh;
+
+  ion-list-header {
+    padding-bottom: 1vh;
+    ion-label {
+      padding-left: 1vw;
+    }
+  }
+}
+
+#reset-data-store {
+  position: fixed;
+  bottom: 1vh;
+  margin-bottom: -1vh;
+  width: 100%;
+  ion-button {
+    margin-left: auto;
+    margin-right: auto;
+
+    div.item-inner {
+      padding-inline-end: unset;
+    }
+  }
 }

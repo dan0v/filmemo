@@ -13,7 +13,7 @@ import { Roll } from '../models/roll';
 })
 export class RollPage implements OnInit {
 
-  constructor(private navCtrl:NavController, private router:Router, private activatedRoute:ActivatedRoute, private _storage:StorageHandlerService) { 
+  constructor(private _router:Router, private _activatedRoute:ActivatedRoute, private _storage:StorageHandlerService) { 
     this.roll = new Roll(_storage);
   }
 
@@ -27,21 +27,21 @@ export class RollPage implements OnInit {
   protected lensText:string = "";
 
   async ngOnInit() {
-    this.activatedRoute.paramMap.subscribe(async paramMap => {
+    this._activatedRoute.paramMap.subscribe(async paramMap => {
       if (!paramMap.has(AppConstant.ID_PARAM)) {
-        this.router.navigate(['/']);
+        this._router.navigate(['/']);
       }
       this.pageId = paramMap.get(AppConstant.ID_PARAM);
       if (this.pageId != null) {
         if (this.pageId == AppConstant.NEW_ROLL_ID) {
           await this.saveRollToSummary();
           await this.saveRoll(true);
-          this.router.navigate(['/roll', this.roll.id]);
+          this._router.navigate(['/roll', this.roll.id]);
         }
         else {
           let roll:Roll|null = await this._storage.getRoll(this.pageId);
           if (roll == null) {
-            this.router.navigateByUrl('');
+            this._router.navigateByUrl('');
           } else {
             this.roll = roll;
           }
@@ -107,7 +107,7 @@ export class RollPage implements OnInit {
   protected async removeRollClicked():Promise<void> {
     await this._storage.removeRoll(this.roll.id);
     await this.removeRollFromSummary();
-    this.router.navigateByUrl(AppConstant.LANDING_PAGE);
+    this._router.navigateByUrl(AppConstant.LANDING_PAGE);
   }
 
   private async saveRoll(newRoll:boolean = false):Promise<void> {
