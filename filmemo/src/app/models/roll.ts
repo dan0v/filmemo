@@ -5,12 +5,12 @@ import { Shot } from "./shot";
 
 export class Roll {
 	public id:string = "";
-	public film:string = "";
-	public expirationDate:string|null = "2000/01/01";
-	public color:FilmType = FilmType.BW;
+	public filmBrand:string = "";
+	public expirationDate:string|null = null;
+	public filmType:FilmType|null = null;
 	public lens:string = "";
 	public camera:string = "";
-	public expectedShotCount:number = 36;
+	public expectedShotCount:number|null = null;
 	public shots: Shot[] = [];
 
 	constructor(private _storage:StorageHandlerService) {
@@ -29,14 +29,14 @@ export class Roll {
 
 	public toJSON():string {
 		return JSON.stringify({
-			id: this.id,
-			film: this.film,
-			expirationDate: this.expirationDate,
-			color: this.color,
-			lens: this.lens,
-			camera: this.camera,
-			expectedShotCount: this.expectedShotCount,
-			shots: this.shots
+			a: this.id,
+			b: this.filmBrand,
+			c: this.expirationDate,
+			d: this.filmType,
+			e: this.lens,
+			f: this.camera,
+			g: this.expectedShotCount,
+			h: this.shots
 		});
 	}
 
@@ -48,14 +48,14 @@ export class Roll {
 		let roll:Roll = new Roll(storage);
 		let parsed = JSON.parse(json);
 
-		roll.id = parsed.id;
-		roll.film = parsed.film;
-		roll.expirationDate = parsed.expirationDate;
-		roll.color = parsed.color;
-		roll.lens = parsed.lens;
-		roll.camera = parsed.camera;
-		roll.expectedShotCount = parsed.expectedShotCount;
-		roll.shots = parsed.shots;
+		roll.id = parsed.a;
+		roll.filmBrand = parsed.b;
+		roll.expirationDate = parsed.c;
+		roll.filmType = parsed.d;
+		roll.lens = parsed.e;
+		roll.camera = parsed.f;
+		roll.expectedShotCount = parsed.g;
+		roll.shots = parsed.h;
 
 		return roll;
 	}

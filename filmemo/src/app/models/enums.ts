@@ -67,7 +67,8 @@ export enum AppConstant {
 	ROLLS_SUMMARY_LIST = "rollsSummaryList",
 	IMAGES_LIST = "imagesList",
 	ID_PARAM = "id",
-	NEW_ROLL_ID = "new"
+	NEW_ROLL_ID = "new",
+	LANDING_PAGE = "/landing"
 }
 
 export enum StorageHandlerEventType {
