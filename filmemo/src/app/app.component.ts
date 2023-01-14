@@ -4,6 +4,7 @@ import { Component } from '@angular/core';
 import { Roll } from './models/roll';
 import { AppConstant, StorageHandlerEventType } from './models/enums';
 import { StorageHandlerEvent } from './models/storage-handler-event';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -16,7 +17,7 @@ export class AppComponent {
   
   public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
 
-  constructor(private _storage:StorageHandlerService) { 
+  constructor(private _router:Router, private _storage:StorageHandlerService) { 
     this._storage.getObservable().subscribe(event => this.handleEvent(event));
   }
 
@@ -35,5 +36,10 @@ export class AppComponent {
 
   private async loadFilmRolls() {
     this.filmRolls = await this._storage.getRollsSummaryList();
+  }
+
+  protected async resetDataStoreClicked(event:any) {
+    await this._storage.clear();
+    this._router.navigate(['/']);
   }
 }

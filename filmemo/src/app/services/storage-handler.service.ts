@@ -63,6 +63,14 @@ export class StorageHandlerService {
     });
   }
 
+  public async clear() {
+    return this.busyWaitInitialization().then(async () => {
+      await this._storage?.clear();
+      this._saveObservable.next(new StorageHandlerEvent(StorageHandlerEventType.ROLLS_SUMMARY_UPDATED));
+      return
+    });
+  }
+
   public getObservable():Observable<StorageHandlerEvent> {
     return this._saveObservable.asObservable();
   }
