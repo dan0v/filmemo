@@ -5,9 +5,25 @@
 </ion-header>
 
 <ion-content>
-  <ion-select placeholder="Select film type">
-    <ion-select-option *ngFor="let type of filmTypeOptions" value="{{type}}">{{type}}</ion-select-option>
-  </ion-select>
+  <ion-item>
+    <ion-label color="primary" position="fixed">Film brand</ion-label>
+    <ion-input placeholder="Enter a film brand" [value]="filmBrandText" (ionChange)="filmBrandChanged($event)" (ionBlur)="filmBrandCommitted($event)"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label color="primary" position="fixed">Film type</ion-label>
+    <ion-select interface="popover" placeholder="Select film type" (ionChange)="filmTypeCommitted($event)"
+      [value]="roll.filmType">
+      <ion-select-option *ngFor="let type of filmTypeOptions" value="{{type}}">{{type}}</ion-select-option>
+    </ion-select>
+  </ion-item>
+  <ion-item>
+    <ion-label color="primary" position="fixed">Camera</ion-label>
+    <ion-input placeholder="Enter a camera" [value]="cameraText" (ionChange)="cameraChanged($event)" (ionBlur)="cameraCommitted($event)"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label color="primary" position="fixed">Lens</ion-label>
+    <ion-input placeholder="Enter a lens" [value]="lensText" (ionChange)="lensChanged($event)" (ionBlur)="lensCommitted($event)"></ion-input>
+  </ion-item>
   <ion-button (click)="removeRollClicked()">
     <ion-icon slot="start" [ios]="'trash' + '-outline'" [md]="'trash' + '-sharp'"></ion-icon>
     <ion-label>Remove roll</ion-label>

@@ -21,6 +21,11 @@ export class RollPage implements OnInit {
   private pageId:string|null = "";
   protected filmTypeOptions:FilmType[] = RollPage.listFilmTypeOptions();
 
+  // Viewmodel
+  protected filmBrandText:string = "";
+  protected cameraText:string = "";
+  protected lensText:string = "";
+
   async ngOnInit() {
     this.activatedRoute.paramMap.subscribe(async paramMap => {
       if (!paramMap.has(AppConstant.ID_PARAM)) {
@@ -40,12 +45,72 @@ export class RollPage implements OnInit {
           } else {
             this.roll = roll;
           }
+
+          this.filmBrandText = this.roll.filmBrand;
+          this.cameraText = this.roll.camera;
+          this.lensText = this.roll.lens;
         }
       }
     });
   }
 
-  private async saveRoll(newRoll:boolean):Promise<void> {
+  protected async filmBrandChanged(event:any):Promise<void> {
+    if (this.filmBrandText != event.detail.value) {
+      this.filmBrandText = event.detail.value;
+    }
+  }
+
+  protected async filmBrandCommitted(event:any):Promise<void> {
+    if (this.roll.filmBrand != this.filmBrandText) {
+      this.roll.filmBrand = this.filmBrandText;
+      await this.saveRoll();
+    }
+  }
+
+  protected async cameraChanged(event:any):Promise<void> {
+    if (this.cameraText != event.detail.value) {
+      this.cameraText = event.detail.value;
+    }
+  }
+
+  protected async cameraCommitted(event:any):Promise<void> {
+    if (this.roll.camera != this.cameraText) {
+      this.roll.camera = this.cameraText;
+      await this.saveRoll();
+    }
+  }
+
+  protected async lensChanged(event:any):Promise<void> {
+    if (this.lensText != event.detail.value) {
+      this.lensText = event.detail.value;
+    }
+  }
+
+  protected async lensCommitted(event:any):Promise<void> {
+    if (this.roll.lens != this.lensText) {
+      this.roll.lens = this.lensText;
+      await this.saveRoll();
+    }
+  }
+
+  protected async filmTypeCommitted(event:any):Promise<void> {
+    if (this.roll.filmType != event.detail.value) {
+      this.roll.filmType = event.detail.value;
+      await this.saveRoll();
+    }
+  }
+
+  protected log(event:any) {
+    console.log(event);
+  }
+
+  protected async removeRollClicked():Promise<void> {
+    await this._storage.removeRoll(this.roll.id);
+    await this.removeRollFromSummary();
+    this.router.navigateByUrl(AppConstant.LANDING_PAGE);
+  }
+
+  private async saveRoll(newRoll:boolean = false):Promise<void> {
     if(newRoll) {
       let uniqueIdFound:boolean = false;
       while (!uniqueIdFound) {
@@ -77,12 +142,6 @@ export class RollPage implements OnInit {
     let existingRollsSummary:RollSummary[] = await this._storage.getRollsSummaryList() ?? [];
     existingRollsSummary = existingRollsSummary.filter(r => r.id != this.roll.id);
     await this._storage.setRollsSummaryList(existingRollsSummary);
-  }
-
-  public async removeRollClicked():Promise<void> {
-    await this._storage.removeRoll(this.roll.id);
-    await this.removeRollFromSummary();
-    this.router.navigateByUrl("/landing");
   }
 
   private static listFilmTypeOptions():FilmType[] {
