@@ -26,6 +26,12 @@ export class Roll {
 		let shot = new Shot(this.lens, this.camera, this.shots.length + 1);
 		this.shots.push(shot);
 	}
+	
+	public removeShot(num:number) {
+		if (this.shots.length > num) {
+			this.shots.splice(num, 1);
+		}
+	}
 
 	public toJSON():string {
 		return JSON.stringify({
@@ -58,5 +64,10 @@ export class Roll {
 		roll.shots = parsed.h;
 
 		return roll;
+	}
+
+	public async save():Promise<void> {
+		await this._storage.setRoll(this.id, this);
+    	console.log("saved roll with ID " + this.id);
 	}
 }

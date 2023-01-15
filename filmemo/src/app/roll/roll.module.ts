@@ -1,3 +1,4 @@
+import { ShotComponent } from './../shot/shot.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -9,12 +10,12 @@ import { RollPageRoutingModule } from './roll-routing.module';
 import { RollPage } from './roll.page';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    RollPageRoutingModule
-  ],
-  declarations: [RollPage]
+    declarations: [RollPage, ShotComponent],
+    imports: [
+        CommonModule,
+        FormsModule,
+        IonicModule,
+        RollPageRoutingModule,
+    ]
 })
 export class RollPageModule {}

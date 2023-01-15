@@ -1,0 +1,14 @@
+
+ion-item.shot-number {
+	max-width: 2em;
+	min-width: 2em;
+	ion-input {
+		min-width: 1.5em;
+	}
+}
+
+ion-item.shot-number::part(native) {
+	padding-inline-start: 0px;
+	padding-inline-end: 0px;
+	--inner-padding-end: 0px;
+}

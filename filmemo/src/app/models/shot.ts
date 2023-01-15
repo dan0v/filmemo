@@ -1,14 +1,13 @@
-import { Aperture } from "./enums";
 
 export class Shot {
-	private shotNumber:number = 1;
-	private aperture:Aperture|null = null;
-	private shutterSpeed:number|null = null;
-	private lens:string = "";
-	private camera:string = ""
-	private location:string = "";
-	private conditions:string = "";
-	private notes:string = "";
+	public shotNumber:number = 1;
+	public aperture:number|null = null;
+	public shutterSpeed:number|null = null;
+	public lens:string = "";
+	public camera:string = ""
+	public location:string = "";
+	public conditions:string = "";
+	public notes:string = "";
 
 	private referenceImageId:string|null = null;
 
@@ -18,7 +17,7 @@ export class Shot {
 		this.shotNumber = shotNumber;
 	}
 
-	protected getReferenceImage() {
+	public getReferenceImage() {
 		if (this.referenceImageId != null) {
 			
 		}
