@@ -17,7 +17,7 @@ export class Aperture {
 	}
 
 	public static halfStops():number[] {
-		return [
+		return ([
 			1.2,
 			1.7,
 			2.4,
@@ -28,11 +28,11 @@ export class Aperture {
 			13,
 			19,
 			27,
-		].concat(Aperture.fullStops()).sort();
+		].concat(Aperture.fullStops()).sort((a,b) => a-b));
 	}
 
 	public static thirdStops():number[] {
-		return [
+		return ([
 			1.1,
 			1.6,
 			1.8,
@@ -52,7 +52,7 @@ export class Aperture {
 			25,
 			29,
 			36
-		].concat(Aperture.halfStops()).sort();
+		].concat(Aperture.halfStops()).sort((a,b) => a-b));
 	}
 }
 

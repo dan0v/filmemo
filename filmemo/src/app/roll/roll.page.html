@@ -4,7 +4,7 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title>
-      <ion-icon [ios]="'film' + '-outline'" [md]="'film' + '-sharp'"></ion-icon>
+      <ion-icon color="primary" [ios]="'film' + '-outline'" [md]="'film' + '-sharp'"></ion-icon>
       <ion-label>Roll</ion-label>
     </ion-title>
   </ion-toolbar>
@@ -12,15 +12,16 @@
 
 <ion-content>
   <ion-item lines="none">
-    <ion-label color="secondary" position="floating">Film brand</ion-label>
-    <ion-input placeholder="What is the brand of film" [value]="filmBrandText" (ionChange)="filmBrandChanged($event)" (ionBlur)="filmBrandCommitted($event)"></ion-input>
-  </ion-item>
-  <ion-item lines="none">
     <ion-label color="secondary" position="floating">Film type</ion-label>
     <ion-select interface="popover" placeholder="What film type is used" (ionChange)="filmTypeCommitted($event)"
       [value]="roll.filmType">
       <ion-select-option *ngFor="let type of filmTypeOptions" value="{{type}}">{{type}}</ion-select-option>
     </ion-select>
+  </ion-item>
+  <ion-item lines="none">
+    <ion-label color="secondary" position="floating">Film brand</ion-label>
+    <ion-input placeholder="What is the brand of film" [value]="filmBrandText" (ionChange)="filmBrandChanged($event)"
+      (ionBlur)="filmBrandCommitted($event)"></ion-input>
   </ion-item>
   <ion-item lines="none">
     <ion-label color="secondary" position="floating">Camera</ion-label>
@@ -40,6 +41,23 @@
       (ionChange)="expiryYearCommitted($event)" type="number"></ion-input>
   </ion-item>
 
+  <ion-button (click)="addShotClicked()">
+    <ion-icon slot="start" [ios]="'add-circle' + '-outline'" [md]="'add-circle' + '-sharp'"></ion-icon>
+    <ion-label>Add shot</ion-label>
+  </ion-button>
+  
+  <ion-list>
+    <app-shot *ngFor="let shot of roll.shots; let i = index" [shot]="shot" [roll]="roll" [shotCount]="i"></app-shot>
+  </ion-list>
+
+  <!-- <ion-accordion-group multiple="false">
+    <ion-accordion *ngFor="let shot of roll.shots; let i = index" >
+      <ion-item><app-shot [shot]="shot" [roll]="roll" [shotCount]="i"></app-shot>
+      </ion-item>
+    </ion-accordion>
+  </ion-accordion-group> -->
+
+  <ion-item-divider></ion-item-divider>
   <ion-button (click)="removeRollClicked()">
     <ion-icon slot="start" [ios]="'trash' + '-outline'" [md]="'trash' + '-sharp'"></ion-icon>
     <ion-label>Remove roll</ion-label>

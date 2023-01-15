@@ -120,6 +120,11 @@ export class RollPage implements OnInit {
     console.log(event);
   }
 
+  protected async addShotClicked():Promise<void> {
+    this.roll.addShot();
+    await this.roll.save();
+  }
+
   protected async removeRollClicked():Promise<void> {
     await this._storage.removeRoll(this.roll.id);
     await this.removeRollFromSummary();
@@ -139,8 +144,7 @@ export class RollPage implements OnInit {
       }
     }
 
-    await this._storage.setRoll(this.roll.id, this.roll);
-    console.log("saved roll with ID " + this.roll.id);
+    await this.roll.save();
   }
 
   private async saveRollToSummary():Promise<void> {

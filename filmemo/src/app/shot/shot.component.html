@@ -1,0 +1,54 @@
+<ion-item-divider></ion-item-divider>
+<ion-item-group>
+  <ion-item lines="none" value="'#' + shot.shotNumber">
+    <ion-item class="shot-number">
+      <ion-label>#</ion-label>
+      <ion-input [value]="shot.shotNumber"></ion-input>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-label color="secondary" position="floating">Camera</ion-label>
+      <ion-textarea placeholder="What camera is used" [value]="cameraText" (ionChange)="cameraChanged($event)"
+        (ionBlur)="cameraCommitted($event)"></ion-textarea>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-label color="secondary" position="floating">Lens</ion-label>
+      <ion-textarea placeholder="What lens is used" [value]="lensText" (ionChange)="lensChanged($event)"
+        (ionBlur)="lensCommitted($event)"></ion-textarea>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-label color="secondary" position="floating">Location</ion-label>
+      <ion-textarea placeholder="What location was this shot taken" [value]="locationText"
+        (ionChange)="locationChanged($event)" (ionBlur)="locationCommitted($event)"></ion-textarea>
+    </ion-item>
+  </ion-item>
+
+  <ion-item lines="none">
+    <ion-item lines="none">
+      <ion-label color="secondary" position="floating">Conditions</ion-label>
+      <ion-textarea placeholder="What were the conditions" [value]="conditionsText" (ionChange)="conditionsChanged($event)"
+        (ionBlur)="conditionsCommitted($event)"></ion-textarea>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-label color="secondary" position="floating">Aperture</ion-label>
+      <ion-select interface="popover" placeholder="What aperture was used" (ionChange)="apertureCommitted($event)"
+        [value]="shot.aperture" type="number" [compareWith]="compareNumbers">
+        <ion-select-option *ngFor="let option of apertureOptions" value="{{option}}"
+          type="number">{{option}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-label color="secondary" position="floating">Shutter speed</ion-label>
+      <ion-input placeholder="What shutter speed was used" [value]="shot.shutterSpeed"
+        (ionChange)="shutterSpeedCommitted($event)" type="number"></ion-input>
+    </ion-item>
+  </ion-item>
+  <ion-item lines="none">
+    <ion-label color="secondary" position="floating">Additional notes</ion-label>
+    <ion-textarea placeholder="Any additional notes" [value]="notesText" (ionChange)="notesChanged($event)"
+      (ionBlur)="notesCommitted($event)"></ion-textarea>
+  </ion-item>
+  <ion-button (click)="removeShotClicked()">
+    <ion-icon slot="start" [ios]="'trash' + '-outline'" [md]="'trash' + '-sharp'"></ion-icon>
+    <ion-label>Remove shot</ion-label>
+  </ion-button>
+</ion-item-group>
