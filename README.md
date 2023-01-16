@@ -4,9 +4,9 @@
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 A cross platform film photography tracking application for recording shooting conditions and settings used for each frame of a roll
 
-## Contributors ✨
+## Contributors
 
-Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+Many thanks to all these people! ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore-start -->
