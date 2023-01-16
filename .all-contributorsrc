@@ -20,6 +20,15 @@
         "review",
         "userTesting"
       ]
+    },
+    {
+      "login": "swell61",
+      "name": "Samuel",
+      "avatar_url": "https://avatars.githubusercontent.com/u/32226560?v=4",
+      "profile": "https://github.com/Swell61",
+      "contributions": [
+        "ideas"
+      ]
     }
   ],
   "contributorsPerLine": 7,
