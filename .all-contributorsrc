@@ -1,0 +1,49 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "commitConvention": "angular",
+  "contributors": [
+    {
+      "login": "dan0v",
+      "name": "dan0v",
+      "avatar_url": "https://avatars.githubusercontent.com/u/7658521?v=4",
+      "profile": "https://github.com/dan0v",
+      "contributions": [
+        "code",
+        "bug",
+        "design",
+        "maintenance",
+        "platform",
+        "review",
+        "userTesting"
+      ]
+    },
+    {
+      "login": "swell61",
+      "name": "Samuel",
+      "avatar_url": "https://avatars.githubusercontent.com/u/32226560?v=4",
+      "profile": "https://github.com/Swell61",
+      "contributions": [
+        "ideas"
+      ]
+    },
+    {
+      "login": "Taylor-Cozy",
+      "name": "Taylor Hetherington",
+      "avatar_url": "https://avatars.githubusercontent.com/u/19821121?v=4",
+      "profile": "https://github.com/Taylor-Cozy",
+      "contributions": [
+        "ideas"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "skipCi": true,
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "projectName": "filmemo",
+  "projectOwner": "dan0v"
+}
