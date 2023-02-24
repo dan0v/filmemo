@@ -63,6 +63,24 @@ export class StorageHandlerService {
     });
   }
 
+  public async addImage(id:string, image:string):Promise<any> {
+    return this.busyWaitInitialization().then(async () => {
+      return await this._storage?.set(id, image);
+    });
+  }
+
+  public async removeImage(id:string):Promise<any> {
+    return this.busyWaitInitialization().then(async () => {
+      return await this._storage?.remove(id);
+    });
+  }
+
+  public async getImage(id:string):Promise<string|null> {
+    return this.busyWaitInitialization().then(async () => {
+      return await this._storage?.get(id);
+    });
+  }
+
   public async clear() {
     return this.busyWaitInitialization().then(async () => {
       await this._storage?.clear();

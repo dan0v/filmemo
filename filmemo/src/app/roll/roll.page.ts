@@ -126,6 +126,9 @@ export class RollPage implements OnInit {
   }
 
   protected async removeRollClicked():Promise<void> {
+    this.roll.shots.forEach(async shot => {
+      await shot.removeImage(this._storage);
+    });
     await this._storage.removeRoll(this.roll.id);
     await this.removeRollFromSummary();
     this._router.navigateByUrl(AppConstant.LANDING_PAGE);
