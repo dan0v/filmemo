@@ -12,3 +12,10 @@ ion-item.shot-number::part(native) {
 	padding-inline-end: 0px;
 	--inner-padding-end: 0px;
 }
+
+.reference-image {
+	width: 90%;
+	margin-left: auto;
+	margin-right: auto;
+	display: block;
+}
