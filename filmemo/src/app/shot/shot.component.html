@@ -56,10 +56,12 @@
       <ion-icon slot="start" [ios]="'camera' + '-outline'" [md]="'camera' + '-sharp'"></ion-icon>
       <ion-label>Remove picture</ion-label>
     </ion-button>
-    <img title="Reference image of shot #{{shot.shotNumber}}" src="{{fetchedReferenceImage}}"/>
   </ion-item>
-  <ion-button (click)="removeShotClicked()">
-    <ion-icon slot="start" [ios]="'trash' + '-outline'" [md]="'trash' + '-sharp'"></ion-icon>
-    <ion-label>Remove shot</ion-label>
-  </ion-button>
+  <img class="reference-image" title="Reference image of shot #{{shot.shotNumber}}" src="{{fetchedReferenceImage}}" />
+  <ion-item lines="none">
+    <ion-button (click)="removeShotClicked()">
+      <ion-icon slot="start" [ios]="'trash' + '-outline'" [md]="'trash' + '-sharp'"></ion-icon>
+      <ion-label>Remove shot</ion-label>
+    </ion-button>
+  </ion-item>
 </ion-item-group>
