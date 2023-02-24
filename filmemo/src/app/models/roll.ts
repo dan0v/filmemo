@@ -63,6 +63,10 @@ export class Roll {
 		roll.expectedShotCount = parsed.g;
 		roll.shots = parsed.h;
 
+		for (let i = 0; i < roll.shots.length; i++) {
+			roll.shots[i] = Object.assign(new Shot("","",0), roll.shots[i]);
+		}
+
 		return roll;
 	}
 

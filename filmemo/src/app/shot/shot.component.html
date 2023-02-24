@@ -47,6 +47,17 @@
     <ion-textarea placeholder="Any additional notes" [value]="notesText" (ionChange)="notesChanged($event)"
       (ionBlur)="notesCommitted($event)"></ion-textarea>
   </ion-item>
+  <ion-item lines="none">
+    <ion-button (click)="addPhotoClicked()">
+      <ion-icon slot="start" [ios]="'camera' + '-outline'" [md]="'camera' + '-sharp'"></ion-icon>
+      <ion-label>Add picture</ion-label>
+    </ion-button>
+    <ion-button (click)="removePhotoClicked()">
+      <ion-icon slot="start" [ios]="'camera' + '-outline'" [md]="'camera' + '-sharp'"></ion-icon>
+      <ion-label>Remove picture</ion-label>
+    </ion-button>
+    <img title="Reference image of shot #{{shot.shotNumber}}" src="{{fetchedReferenceImage}}"/>
+  </ion-item>
   <ion-button (click)="removeShotClicked()">
     <ion-icon slot="start" [ios]="'trash' + '-outline'" [md]="'trash' + '-sharp'"></ion-icon>
     <ion-label>Remove shot</ion-label>

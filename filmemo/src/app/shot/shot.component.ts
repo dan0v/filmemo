@@ -1,3 +1,4 @@
+import { CameraHandlerService } from './../services/camera-handler.service';
 import { Aperture } from './../models/enums';
 import { StorageHandlerService } from './../services/storage-handler.service';
 import { Shot } from './../models/shot';
@@ -27,9 +28,10 @@ export class ShotComponent implements OnInit {
   protected notesText:string = "";
   protected shutterSpeedText:string = "";
 
+  protected fetchedReferenceImage:string = "";
   protected apertureOptions:number[] = Aperture.thirdStops();
 
-  constructor(private _storage:StorageHandlerService) { }
+  constructor(private _storage:StorageHandlerService, private _nativeCamera:CameraHandlerService) { }
 
   ngOnInit() {
     this.cameraText = this.shot.camera;
@@ -41,8 +43,13 @@ export class ShotComponent implements OnInit {
     console.log(this.apertureOptions);
   }
 
+  async ngAfterViewInit() {  
+    await this.fetchReferenceImage();
+  }
+
   protected async removeShotClicked():Promise<void> {
     this.roll.removeShot(this.shotCount);
+    await this.shot.removeImage(this._storage);
     await this.roll.save();
   }
 
@@ -129,6 +136,26 @@ export class ShotComponent implements OnInit {
 
   protected compareNumbers(o1:number, o2:number):boolean {
     return o1 == o2;
+  }
+
+  protected async fetchReferenceImage():Promise<void> {
+    if (this.shot.referenceImageId) {
+      this.fetchedReferenceImage = "/assets/loading.gif"
+      this.fetchedReferenceImage = (await this._storage.getImage(this.shot.referenceImageId)) ?? "";
+    }
+  }
+
+  protected async addPhotoClicked():Promise<void> {
+    let picture:string = (await this._nativeCamera.takePicture()) ?? "";
+    await this.shot.setImage(this._storage, picture);
+    await this.roll.save();
+    await this.fetchReferenceImage();
+  }
+
+  protected async removePhotoClicked():Promise<void> {
+    await this.shot.removeImage(this._storage);
+    await this.roll.save();
+    await this.fetchReferenceImage();
   }
 
 }
